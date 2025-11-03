@@ -9,9 +9,13 @@ function clearScreen() {
 }
 
 function calculate() {
-  let x = result.value;
-  let y = eval(x);
-  result.value = y;
+  let expression = result.value;
+  try {
+    let calculatedResult = new Function('return ' + expression)();
+    result.value = calculatedResult;
+  } catch (error) {
+    result.value = 'Error';
+  }
 }
 
 document.addEventListener('keydown', function(event) {
